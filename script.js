@@ -1,4 +1,4 @@
-const weatherSection = document.getElementById("weather");
+const weatherSection = document.getElementById("weather-content");
 const forecastSection = document.getElementById("forecast");
 const searchForm = document.getElementById("search-form");
 const cityInput = document.getElementById("city-input");
@@ -35,9 +35,12 @@ searchForm.addEventListener("submit", function (event) {
           <h2>${data.name}</h2>
           <img src="${iconUrl}" alt="${description}">
           <p>${temperature}°C</p>
-          <p>${description}</p> 
+          <p class="weather-description">${description}</p> 
+        
+        <div class="sun-times">
           <p>Sunrise: ${sunriseTime}</p>
-          <p>Sunset: ${sunsetTime}</p> `;
+          <p>Sunset: ${sunsetTime}</p> 
+        </div>`;
         });
 
     const forecastUrl =
@@ -69,14 +72,18 @@ searchForm.addEventListener("submit", function (event) {
                     return item.dt_txt.includes("12:00:00");
                 });
 
+                const temperatures = dayForecast.map(item => {
+                    return item.main.temp - 273.15;
+                });
+
+                const highTemperature = Math.max(...temperatures).toFixed(1);
+                const lowTemperature = Math.min(...temperatures).toFixed(1);
+
                 const forecastDate = new Date(selectedForecast.dt * 1000);
 
                 const dayName = forecastDate.toLocaleDateString("en-US", {
                     weekday: "short"
                 });
-
-                const temperature =
-                    (selectedForecast.main.temp - 273.15).toFixed(1);
 
                 const description =
                     selectedForecast.weather[0].description;
@@ -94,11 +101,13 @@ searchForm.addEventListener("submit", function (event) {
                         <img
                             src="${iconUrl}"
                             alt="${description}">
-
-                        <p>${temperature}°C</p>
-
-                        <p>${description}</p>
-                    </div>
+                        
+                <div class="forecast-info">
+                    <p>
+                        <span class="high-temperature">${highTemperature}°</span> 
+                        <span class="low-temperature">${lowTemperature}°</span>
+                    </p>
+                </div>
                 `;
             }
         });

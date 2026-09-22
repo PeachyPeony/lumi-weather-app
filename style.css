@@ -7,53 +7,146 @@ body {
 main {
     width: min(90%, 500px);
     margin: 50px auto;
+    text-align: center;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 #weather {
+    position: relative;
     background: linear-gradient(135deg, #999cff, #7779e8);
     color: white;
-    padding: 30px;
+    padding: 40px 30px;
     min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px 20px 0 0;
+}
+
+#weather-content img {
+    width: 100px;
+    height: 100px;
+    margin: 8px 0;
 }
 
 #weather p:first-of-type {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     font-weight: 300;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
-#weather h2 {
-    font-size: 1rem;
+#weather-content h2 {
+    font-size: 1.5rem;
     font-weight: normal;
-    margin: 0;
+    margin: 8px 0 4px;
+}
+
+.weather-description {
+    margin: 2px 0 10px;
+    font-size: 0.95rem;
+    opacity: 0.85;
 }
 
 #forecast {
     background-color: white;
-    padding: 20px;
+    padding: 24px 25px;
 }
 
 #forecast>div {
     display: grid;
-    grid-template-columns: 50px 50px 1fr;
+    grid-template-columns: 60px 60px 1fr;
     align-items: center;
     gap: 15px;
-    padding: 12px 0;
+    padding: 14px 0;
     border-bottom: 1px solid #eeeeee;
+}
+
+#forecast>div:last-child {
+    border-bottom: none;
 }
 
 #forecast h3 {
     margin: 0;
-    font-size: 1rem;
-    font-weight: normal;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 #forecast img {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: auto;
 }
 
 #forecast p {
     margin: 0;
     text-align: right;
+}
+
+.forecast-info {
+    text-align: right;
+}
+
+.forecast-info p {
+    margin: 0;
+}
+
+.high-temperature {
+    font-weight: 600;
+}
+
+.low-temperature {
+    color: #aaa;
+    margin-left: 12px;
+    font-weight: 400;
+}
+
+.forecast-info p:first-child {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.forecast-info p:last-child {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.sun-times {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 18px;
+}
+
+#weather .sun-times p {
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.menu-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    padding: 5px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.refresh-button {
+    display: block;
+    margin: 20px auto 0;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background-color: white;
+    color: #7779e8;
+    font-size: 1.5rem;
+    cursor: pointer;
 }

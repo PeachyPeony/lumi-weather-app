@@ -65,13 +65,16 @@ searchForm.addEventListener("submit", function (event) {
                 const daysAhead = day;
 
                 const tomorrowDate = new Date();
-
                 tomorrowDate.setDate(
                     tomorrowDate.getDate() + daysAhead
                 );
 
                 const tomorrowString =
-                    tomorrowDate.toISOString().split("T")[0];
+                    `${tomorrowDate.getFullYear()}-${String(
+                        tomorrowDate.getMonth() + 1
+                    ).padStart(2, "0")}-${String(
+                        tomorrowDate.getDate()
+                    ).padStart(2, "0")}`;
 
                 const dayForecast = data.list.filter(item => {
                     return item.dt_txt.startsWith(tomorrowString);

@@ -2,11 +2,20 @@ const weatherSection = document.getElementById("weather-content");
 const forecastSection = document.getElementById("forecast");
 const searchForm = document.getElementById("search-form");
 const cityInput = document.getElementById("city-input");
+const refreshButton = document.querySelector(".refresh-button");
+let currentCity = "";
 
 searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const city = cityInput.value;
+    const city = cityInput.value.trim();
+    currentCity = city;
+
+    if (city === "") {
+        weatherSection.innerHTML = `<p>Please enter a city.</p>`;
+        forecastSection.innerHTML = "";
+        return;
+    }
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
@@ -126,4 +135,11 @@ searchForm.addEventListener("submit", function (event) {
         .catch(error => {
             forecastSection.innerHTML = "";
         });
+});
+
+refreshButton.addEventListener("click", function () {
+    if (currentCity !== "") {
+        cityInput.value = currentCity;
+        searchForm.requestSubmit();
+    }
 });

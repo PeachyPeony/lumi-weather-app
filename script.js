@@ -2,14 +2,11 @@ const weatherSection = document.getElementById("weather-content");
 const forecastSection = document.getElementById("forecast");
 const searchForm = document.getElementById("search-form");
 const cityInput = document.getElementById("city-input");
-const refreshButton = document.querySelector(".refresh-button");
-let currentCity = "";
 
 searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const city = cityInput.value.trim();
-    currentCity = city;
 
     if (city === "") {
         weatherSection.innerHTML = `<p>Please enter a city.</p>`;
@@ -18,7 +15,6 @@ searchForm.addEventListener("submit", function (event) {
     }
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-
 
     fetch(url)
         .then(response => response.json())
@@ -42,7 +38,6 @@ searchForm.addEventListener("submit", function (event) {
             const sunsetTime = sunset.toLocaleTimeString([], {
                 hour: "2-digit", minute: "2-digit", hour12: false
             });
-
 
             weatherSection.innerHTML = `
           <h2>${data.name}</h2>
@@ -69,24 +64,24 @@ searchForm.addEventListener("submit", function (event) {
         .then(data => {
             forecastSection.innerHTML = "";
 
-            for (let day = 1; day <= 4; day++) {
+            const forecastDays = 4;
 
-                const daysAhead = day;
+            for (let daysAhead = 1; daysAhead <= forecastDays; daysAhead++) {
 
-                const tomorrowDate = new Date();
-                tomorrowDate.setDate(
-                    tomorrowDate.getDate() + daysAhead
+                const targetDate = new Date();
+                targetDate.setDate(
+                    targetDate.getDate() + daysAhead
                 );
 
-                const tomorrowString =
-                    `${tomorrowDate.getFullYear()}-${String(
-                        tomorrowDate.getMonth() + 1
+                const targetDateString =
+                    `${targetDate.getFullYear()}-${String(
+                        targetDate.getMonth() + 1
                     ).padStart(2, "0")}-${String(
-                        tomorrowDate.getDate()
+                        targetDate.getDate()
                     ).padStart(2, "0")}`;
 
                 const dayForecast = data.list.filter(item => {
-                    return item.dt_txt.startsWith(tomorrowString);
+                    return item.dt_txt.startsWith(targetDateString);
                 });
 
                 const selectedForecast = dayForecast.find(item => {
@@ -132,14 +127,7 @@ searchForm.addEventListener("submit", function (event) {
                 `;
             }
         })
-        .catch(error => {
+        .catch(() => {
             forecastSection.innerHTML = "";
         });
-});
-
-refreshButton.addEventListener("click", function () {
-    if (currentCity !== "") {
-        cityInput.value = currentCity;
-        searchForm.requestSubmit();
-    }
 });

@@ -27,8 +27,12 @@ searchForm.addEventListener("submit", function (event) {
 
             const sunrise = new Date(data.sys.sunrise * 1000);
             const sunset = new Date(data.sys.sunset * 1000);
-            const sunriseTime = sunrise.toLocaleTimeString();
-            const sunsetTime = sunset.toLocaleTimeString();
+            const sunriseTime = sunrise.toLocaleTimeString([], {
+                hour: "2-digit", minute: "2-digit", hour12: false
+            });
+            const sunsetTime = sunset.toLocaleTimeString([], {
+                hour: "2-digit", minute: "2-digit", hour12: false
+            });
 
 
             weatherSection.innerHTML = `
@@ -47,7 +51,12 @@ searchForm.addEventListener("submit", function (event) {
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
 
     fetch(forecastUrl)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Forecast request failed");
+            }
+            return response.json();
+        })
         .then(data => {
             forecastSection.innerHTML = "";
 
@@ -110,5 +119,8 @@ searchForm.addEventListener("submit", function (event) {
                 </div>
                 `;
             }
+        })
+        .catch(error => {
+            forecastSection.innerHTML = "";
         });
 });

@@ -12,11 +12,38 @@ main {
     overflow: hidden;
 }
 
+#search-form {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 320px;
+    box-sizing: border-box;
+    margin: 35px auto 20px;
+}
+
+#search-form button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+    color: #7779e8;
+    cursor: pointer;
+}
+
+#city-input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
 #weather {
     position: relative;
     background: linear-gradient(135deg, #999cff, #7779e8);
     color: white;
-    padding: 40px 30px;
+    padding: 40px 20px;
     min-height: 300px;
     display: flex;
     flex-direction: column;

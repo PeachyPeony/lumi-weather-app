@@ -13,7 +13,7 @@ searchForm.addEventListener("submit", function (event) {
         forecastSection.innerHTML = "";
         return;
     }
-
+    // Build the API URL for the current weather
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
     fetch(url)
@@ -25,6 +25,7 @@ searchForm.addEventListener("submit", function (event) {
                 return;
             }
 
+            // OpenWeather returns temperature in Kelvin, so convert it to Celsius
             const temperature = (data.main.temp - 273.15).toFixed(1);
             const description = data.weather[0].description;
             const icon = data.weather[0].icon;
@@ -64,10 +65,12 @@ searchForm.addEventListener("submit", function (event) {
         .then(data => {
             forecastSection.innerHTML = "";
 
+            // Get the next four days for the forecast
             const forecastDays = 4;
 
             for (let daysAhead = 1; daysAhead <= forecastDays; daysAhead++) {
 
+                // Calculate the date for each day in the forecast
                 const targetDate = new Date();
                 targetDate.setDate(
                     targetDate.getDate() + daysAhead
@@ -92,6 +95,7 @@ searchForm.addEventListener("submit", function (event) {
                     return item.main.temp - 273.15;
                 });
 
+                // Find the highest and lowest temperature for each forecast day
                 const highTemperature = Math.max(...temperatures).toFixed(1);
                 const lowTemperature = Math.min(...temperatures).toFixed(1);
 

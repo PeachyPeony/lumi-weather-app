@@ -185,3 +185,21 @@ main {
     font-size: 1.5rem;
     cursor: pointer;
 }
+
+/* Media query */
+
+@media (min-width: 1200px) {
+    main {
+        width: min(80%, 700px);
+    }
+
+    #weather {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    #forecast {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}

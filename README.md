@@ -43,7 +43,7 @@ The API key is stored locally in `config.js` and is exluded from the Git reposit
 
 ## Deployment
 The live application is deployed using Cloudflare Pages.
-Live site: 
+Live site: (https://lumi-weather-app.pages.dev/)
 
 ## What I Learned 
 Through this project, I practiced: 

@@ -1,6 +1,6 @@
 /* General styles */
 body {
-    margin: 0px;
+    margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
 }
@@ -45,7 +45,7 @@ main {
     position: relative;
     background: linear-gradient(135deg, #999cff, #7779e8);
     color: white;
-    padding: 20px;
+    padding: 10px 20px;
     min-height: 300px;
     display: flex;
     flex-direction: column;
@@ -86,7 +86,7 @@ main {
 
 #forecast>div {
     display: grid;
-    grid-template-columns: 60px 60px 1fr;
+    grid-template-columns: 80px 80px 1fr;
     align-items: center;
     gap: 15px;
     padding: 14px 0;
@@ -149,7 +149,7 @@ main {
     justify-content: center;
     gap: 50px;
     margin-top: 18px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 #weather .sun-times p {
@@ -190,9 +190,13 @@ main {
 /* Mobile */
 @media (max-width: 599px) {
     .menu-button {
-        top: 12px;
-        left: 12px;
+        top: 8px;
+        left: 5px;
     }
+}
+
+.sun-times {
+    margin-bottom: 50px;
 }
 
 /* Desktop */
